@@ -1,0 +1,1 @@
+# gijutsushoten6_functions_with_go
