@@ -20,8 +20,8 @@ type GCSEvent struct {
 	Updated        time.Time `json:"updated"`
 }
 
-//3.TriggetStorage関数がStorage（バケット）にファイルが作成されたタイミングで実行される
-func TriggetStorage(ctx context.Context, e GCSEvent) error {
+//3.TriggerStorage関数がStorage（バケット）にファイルが作成されたタイミングで実行される
+func TriggerStorage(ctx context.Context, e GCSEvent) error {
 	//4.トリガーしたイベントの詳細情報を取り出す
 	meta, err := metadata.FromContext(ctx)
 	if err != nil {
