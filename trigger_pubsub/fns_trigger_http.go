@@ -32,7 +32,7 @@ func TriggerPubSub(ctx context.Context, m PubSubMessage) error {
 		return nil
 	}
 
-	////7.メッセージの内容をLoggingへ出力する
+	//7.メッセージの内容をLoggingへ出力する
 	log.Printf("こんにちは、%sさん！%sへCloud Pub/SubからFunctions経由で愛をこめて。", i.Name, i.Place)
 	return nil
 }
