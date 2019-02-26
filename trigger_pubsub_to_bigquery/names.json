@@ -1,0 +1,20 @@
+[
+ {
+   "description": "名前",
+   "name": "NAME",
+   "type": "String",
+   "mode": "Required"
+ },
+ {
+   "description": "場所",
+   "name": "PLACE",
+   "type": "String",
+   "mode": "Required"
+ },
+ {
+   "description": "時刻",
+   "name": "DATETIME",
+   "type": "Timestamp",
+   "mode": "Nullable"
+ }
+]
