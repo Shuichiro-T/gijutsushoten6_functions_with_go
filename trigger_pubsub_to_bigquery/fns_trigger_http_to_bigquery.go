@@ -27,9 +27,6 @@ type Info struct {
 func TriggerPubSubToBigQuery(ctx context.Context, m PubSubMessage) error {
 	var i Info
 
-	//5.プロジェクトIDを取得する
-	projectID := os.Getenv("GCP_PROJECT")
-
 	//6.json形式のメッセージを構造体へ格納する
 	err := json.Unmarshal(m.Data, &i)
 
@@ -39,11 +36,21 @@ func TriggerPubSubToBigQuery(ctx context.Context, m PubSubMessage) error {
 		return nil
 	}
 
+	InsertBigQuery(ctx, i)
+
+	return nil
+}
+
+func InsertBigQuery(ctx context.Context, i Info) {
+
+	//5.プロジェクトIDを取得する
+	projectID := os.Getenv("GCP_PROJECT")
+
 	//8.BigQueryを操作するクライアントを作成する、エラーの場合はLoggingへ出力する
 	client, err := bigquery.NewClient(ctx, projectID)
 	if err != nil {
 		log.Printf("BigQuery接続エラー　Error:%T message: %v", err, err)
-		return nil
+		return
 	}
 
 	//9.確実にクライアントを閉じるようにする
@@ -61,8 +68,6 @@ func TriggerPubSubToBigQuery(ctx context.Context, m PubSubMessage) error {
 	err = u.Put(ctx, items)
 	if err != nil {
 		log.Printf("データ書き込みエラー　Error:%T message: %v", err, err)
-		return nil
+		return
 	}
-
-	return nil
 }
