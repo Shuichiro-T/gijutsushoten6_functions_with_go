@@ -37,13 +37,13 @@ func TriggerPubSubToBigQuery(ctx context.Context, m PubSubMessage) error {
 	}
 
 	//7.BigQueryにデータを追加する関数を呼び出す
-	InsertBigQuery(ctx, i)
+	InsertBigQuery(ctx, &i)
 
 	return nil
 }
 
 //8.BigQueryにデータを追加する関数を定義する
-func InsertBigQuery(ctx context.Context, i Info) {
+func InsertBigQuery(ctx context.Context, i *Info) {
 
 	//9.プロジェクトIDを取得する
 	projectID := os.Getenv("GCP_PROJECT")
@@ -64,7 +64,7 @@ func InsertBigQuery(ctx context.Context, i Info) {
 	//13.現在時刻を構造体へ格納する
 	i.Datetime = time.Now()
 
-	items := []Info{i}
+	items := []*Info{i}
 
 	//14.テーブルへデータの追加を行う、エラーの場合はLoggingへ出力する
 	err = u.Put(ctx, items)
