@@ -37,13 +37,13 @@ func TriggerPubSubToFirestore(ctx context.Context, m PubSubMessage) error {
 	}
 
 	//7.Firestoreにデータを追加する関数を呼び出す
-	PutFirestore(ctx, i)
+	PutFirestore(ctx, &i)
 
 	return nil
 }
 
 //8.Firestoreにデータを追加する関数を定義する
-func PutFirestore(ctx context.Context, i Info) {
+func PutFirestore(ctx context.Context, i *Info) {
 
 	//9.プロジェクトIDを取得する
 	projectID := os.Getenv("GCP_PROJECT")
